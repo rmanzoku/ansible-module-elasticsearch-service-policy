@@ -1,0 +1,8 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Update
+      ess_policy:
+        state: present
+        domain: domaindomain
+        policy_json: "{{ lookup('file', 'policy.json') }}"
