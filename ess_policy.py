@@ -19,7 +19,7 @@ options:
     required: true
   state:
     description:
-      - Whether to create or delete the IAM policy.
+      - Whether to create or delete the ES policy.
     required: false
     default: present
     choices: [ "present", "absent" ]
