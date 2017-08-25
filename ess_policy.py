@@ -1,6 +1,43 @@
 #!/usr/bin/python
 # coding: utf-8
 
+DOCUMENTATION = '''
+---
+module: ess_policy
+short_description: Set policy to Elasticsearch Service
+description:
+    - Set policy to Elasticsearch Service
+options:
+  domain:
+    description:
+      - Domain name
+    required: false
+  policy_json:
+    description:
+      - A properly json formatted policy as string (mutually exclusive with C(policy_document),
+        see https://github.com/ansible/ansible/issues/7005#issuecomment-42894813 on how to use it properly)
+    required: true
+  state:
+    description:
+      - Whether to create or delete the IAM policy.
+    required: false
+    default: present
+    choices: [ "present", "absent" ]
+author:
+    - "Ryo Manzoku (@rmanzoku)"
+extends_documentation_fragment: aws
+'''
+
+EXAMPLES = '''
+# Update a policy to the domain from json file
+tasks:
+- name: Update a policy to the domain
+  ess_policy:
+    domain: example
+    state: present
+    policy_json: "{{ lookup('file', 'policy.json') }}"
+'''
+
 try:
     import boto3
     HAS_BOTO3 = True
